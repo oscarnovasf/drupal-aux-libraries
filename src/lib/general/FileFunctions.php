@@ -245,6 +245,27 @@ class FileFunctions {
         $clean;
   }
 
+  /**
+   * Elimina el contenido de un directorio.
+   *
+   * @param string $target
+   *   Path completo del directorio a limpiar.
+   */
+  function cleanDirectory(string $target) {
+    if (is_dir($target)) {
+      $files = glob($target . '*', GLOB_MARK);
+
+      foreach ($files as $file) {
+        cleanDirectory($file);
+      }
+
+      rmdir($target);
+    }
+    elseif (is_file($target)) {
+      unlink($target);
+    }
+  }
+
   /* ***************************************************************************
    * FUNCIONES PRIVADAS.
    * ************************************************************************ */

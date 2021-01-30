@@ -244,6 +244,23 @@ class StringFunctions {
     return $randomString;
   }
 
+  /**
+   * Función truncate().
+   *
+   * Recorta una cadena añadiendo puntos suspensivos según la longitud indicada.
+   *
+   * @param string $str
+   *   Cadena a recortar.
+   * @param int $width
+   *   Número de caracteres máximo que se desea mostrar.
+   *
+   * @return string
+   *   Truncate string.
+   */
+  public static function truncate(string $str, int $width) {
+    return strtok(wordwrap($str, $width, "...\n"), "\n");
+  }
+
   /* ***************************************************************************
    * FUNCIONES PRIVADAS.
    * ************************************************************************ */
