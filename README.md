@@ -32,6 +32,9 @@ Librerías auxiliares para desarrollo de módulos en Drupal 8 y 9
 * ### src/lib/general/ValidateFunctions.php
   Funciones de validación de datos como pueden ser DNI, CIF, NIE...
 
+* ### src/lib/Mailing.php
+  Facilita el envío de correos electrónicos.
+
 ## Instalación
 
 * ### Instalación manual
@@ -55,8 +58,8 @@ momento.
 
 [mi-web]: https://oscarnovas.com "for developers"
 
-[version]: v0.0.2
-[version-badge]: https://img.shields.io/badge/version-0.0.2-blue.svg
+[version]: v0.0.3
+[version-badge]: https://img.shields.io/badge/version-0.0.3-blue.svg
 
 [license]: LICENSE.md
 [license-badge]: https://img.shields.io/github/license/oscarnovasf/drupal-aux-libraries "Leer la licencia"

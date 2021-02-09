@@ -246,24 +246,24 @@ class FileFunctions {
   }
 
   /**
-   * Elimina el contenido de un directorio.
+   * Elimina un directorio y todo su contenido.
    *
    * @param string $target
    *   Path completo del directorio a limpiar.
+   *   Debe incluir la "/" al final.
    */
-  function cleanDirectory(string $target) {
-    if (is_dir($target)) {
-      $files = glob($target . '*', GLOB_MARK);
-
-      foreach ($files as $file) {
-        cleanDirectory($file);
+  public static function cleanDirectory(string $target) {
+    $it = new \RecursiveDirectoryIterator($target, \FilesystemIterator::SKIP_DOTS);
+    $it = new \RecursiveIteratorIterator($it, \RecursiveIteratorIterator::CHILD_FIRST);
+    foreach ($it as $file) {
+      if ($file->isDir()) {
+        rmdir($file->getPathname());
       }
-
-      rmdir($target);
+      else {
+        unlink($file->getPathname());
+      }
     }
-    elseif (is_file($target)) {
-      unlink($target);
-    }
+    rmdir($target);
   }
 
   /* ***************************************************************************
