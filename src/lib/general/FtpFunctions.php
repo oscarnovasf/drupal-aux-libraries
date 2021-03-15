@@ -13,8 +13,6 @@ namespace Drupal\module_template\lib\general;
 class FtpFunctions {
 
   /**
-   * Función getFileFromFtp().
-   *
    * Descarga un archivo por FTP.
    *
    * @param string $ftp_server
@@ -70,8 +68,6 @@ class FtpFunctions {
   }
 
   /**
-   * Función getFileContentFromFtp().
-   *
    * Obtiene el contenido de un archivo por FTP.
    *
    * @param string $ftp_server

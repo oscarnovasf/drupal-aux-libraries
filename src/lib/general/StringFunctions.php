@@ -13,8 +13,6 @@ namespace Drupal\module_template\lib\general;
 class StringFunctions {
 
   /**
-   * Función after().
-   *
    * Devuelve el texto que se encuentra desde la primera aparición de $chr.
    *
    * @param string $chr
@@ -37,8 +35,6 @@ class StringFunctions {
   }
 
   /**
-   * Función afterLast().
-   *
    * Devuelve el texto que se encuentra desde la última aparición de $chr.
    *
    * @param string $chr
@@ -61,8 +57,6 @@ class StringFunctions {
   }
 
   /**
-   * Función before().
-   *
    * Devuelve el texto que se encuentra hasta la primera aparición de $chr.
    *
    * @param string $chr
@@ -85,9 +79,7 @@ class StringFunctions {
   }
 
   /**
-   * Función beforeLast().
-   *
-   * Devuelve el trexto que se encuentra hasta la última aparición de $chr.
+   * Devuelve el texto que se encuentra hasta la última aparición de $chr.
    *
    * @param string $chr
    *   Caracter a buscar.
@@ -104,8 +96,6 @@ class StringFunctions {
   }
 
   /**
-   * Función between().
-   *
    * Devuelve el texto que se encuentra entre dos caracteres.
    *
    * @param string $chr
@@ -125,8 +115,6 @@ class StringFunctions {
   }
 
   /**
-   * Función betweenLast().
-   *
    * Devuelve el texto que se encuentra entre dos caracteres (última aparición).
    *
    * @param string $chr
@@ -146,8 +134,6 @@ class StringFunctions {
   }
 
   /**
-   * Función stripWordHtml().
-   *
    * Elimina el HTML que es guardado cuando se pega desde MS Word.
    *
    * @param string $text
@@ -209,8 +195,6 @@ class StringFunctions {
   }
 
   /**
-   * Función generateKey().
-   *
    * Genera una clave a partir de los parámetros recibidos.
    *
    * @param int $itemsGroup
@@ -245,8 +229,6 @@ class StringFunctions {
   }
 
   /**
-   * Función truncate().
-   *
    * Recorta una cadena añadiendo puntos suspensivos según la longitud indicada.
    *
    * @param string $str
@@ -261,14 +243,25 @@ class StringFunctions {
     return strtok(wordwrap($str, $width, "...\n"), "\n");
   }
 
+  /**
+   * Elimina todas las etiquetas "style" de una cadena de texto HTML.
+   *
+   * @param string $str
+   *   Cadena a modificar.
+   *
+   * @return string
+   *   Cadena sin etiquetas "style".
+   */
+  public static function deleteStyleTags(string $str) {
+    return preg_replace('/(<[^>]+) style=".*?"/i', '$1', $str);
+  }
+
   /* ***************************************************************************
    * FUNCIONES PRIVADAS.
    * ************************************************************************ */
 
   /**
-   * Función strRevPos().
-   *
-   *   Devuelve la posición de un caracter contando desde el final.
+   * Devuelve la posición de un caracter contando desde el final.
    *
    * @param string $instr
    *   Caracter a buscar.

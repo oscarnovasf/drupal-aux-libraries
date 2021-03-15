@@ -29,8 +29,6 @@ class Mailing {
   use StringTranslationTrait;
 
   /**
-   * Función sendMail().
-   *
    * Envía un mensaje a partir de los parámetros indicados.
    *
    * @param string $key
@@ -40,6 +38,8 @@ class Mailing {
    *   ['subject'] => Asunto del mensaje.
    *   ['message'] => Cuerpo del mensaje.
    *   ['to'] => Destinatario del mensaje.
+   *   ['cc'] => Destinatario de una copia del mensaje (opcional).
+   *   ['bcc'] => Destinatario de una copia oculta del mensaje (opcional).
    *   ['lang_code'] => Idioma del contenido (opcional).
    *   ['attach_nid'] => Identificador del nodo a adjuntar (opcional).
    *   ['attachments'] => Array con archivos adjuntos (opcional).
@@ -66,6 +66,10 @@ class Mailing {
     /* Asunto y cuerpo del mensaje */
     $subject = $parametros['subject'];
     $message = $parametros['message'];
+
+    /* Compruebo si se han pasado valores para CC o BCC */
+    $params['Cc'] = isset($parametros['cc']) ? $parametros['cc'] : NULL;
+    $params['Bcc'] = isset($parametros['bcc']) ? $parametros['bcc'] : NULL;
 
     /* Modificaciones propias de cada $key usado */
     switch ($key) {

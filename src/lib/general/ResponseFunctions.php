@@ -49,8 +49,6 @@ class ResponseFunctions {
   }
 
   /**
-   * Función setStatus().
-   *
    * Establece el valor de "status".
    *
    * @param bool $status
@@ -62,8 +60,6 @@ class ResponseFunctions {
   }
 
   /**
-   * Función getStatus().
-   *
    * Devuelve el valor de "status".
    *
    * @return bool
@@ -74,8 +70,6 @@ class ResponseFunctions {
   }
 
   /**
-   * Función setResponse().
-   *
    * Establece el valor de "response".
    *
    * @param array $response_data
@@ -86,9 +80,8 @@ class ResponseFunctions {
   }
 
   /**
-   * Función getResponse().
-   *
    * Devuelve un valor del array response.
+   *
    * Si no se pasa el parámetro devuelve todos los valores.
    *
    * @param string $key
@@ -109,8 +102,6 @@ class ResponseFunctions {
   }
 
   /**
-   * Función getJson().
-   *
    * Devuelve todas las propiedades en formato Json.
    *
    * @return Drupal\Core\Cache\CacheableJsonResponse

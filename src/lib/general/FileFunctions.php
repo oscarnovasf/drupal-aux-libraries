@@ -19,10 +19,7 @@ class FileFunctions {
   ];
 
   /**
-   * Función deleteFilesPreviousTo().
-   *
-   * Elimina todos los archivos anteriores a la fecha dada.
-   * (Fecha en formato timestamp).
+   * Elimina todos los archivos anteriores a la fecha dada (en timestamp).
    *
    * @param string $realPath
    *   Ruta completa al directorio donde deseamos buscar.
@@ -33,8 +30,6 @@ class FileFunctions {
    *
    * @return int
    *   Número de archivos que han sido borrados.
-   *
-   * @see README.md
    */
   public static function deleteFilesPreviousTo(string $realPath, int $timeStamp) {
 
@@ -59,10 +54,7 @@ class FileFunctions {
   }
 
   /**
-   * Función getNamesByDateAsc().
-   *
-   * Devuelve el listado de archivos de un directorio
-   * ordenado por fecha.
+   * Devuelve el listado de archivos de un directorio (ordenado por fecha).
    *
    * @param string $realPath
    *   Ruta completa al directorio donde deseamos buscar.
@@ -70,8 +62,6 @@ class FileFunctions {
    *
    * @return array
    *   Array con los nombres de los archivos.
-   *
-   * @see README.md
    */
   public static function getNamesByDateAsc(string $realPath) {
 
@@ -96,7 +86,7 @@ class FileFunctions {
   }
 
   /**
-   * Función readFile().
+   * Obtiene el contenido de un fichero.
    *
    * @param string $realPath
    *   Ruta completa al archivo.
@@ -106,8 +96,6 @@ class FileFunctions {
    * @return Resource|bool
    *   Devuelve el archivo si lo encuentra.
    *   False en caso de no poder leer el archivo.
-   *
-   * @see README.md
    */
   public static function readFile(string $realPath, array $allowedExt) {
 
@@ -124,8 +112,6 @@ class FileFunctions {
   }
 
   /**
-   * Función createFileLog().
-   *
    * Genera un archivo de log a partir de un array.
    *
    * @param string $fileName
@@ -145,9 +131,9 @@ class FileFunctions {
   }
 
   /**
-   * Función getDirContent().
+   * Obtiene el contenido de un directorio excluyendo las carpetas del sistema.
    *
-   * Obtiene el contenido de un directorio excluyendo las carpetas del sistema:
+   * Las carpetas excluídas son:
    * (. y ..)
    *
    * @param string $real_path
@@ -179,9 +165,8 @@ class FileFunctions {
   }
 
   /**
-   * Función sanitizeFilename().
-   *
    * Quita los caracteres "raros" del nombre del fichero.
+   *
    * Se debe usar antes de guardar en Drupal para evitar el
    * borrado automático de los ficheros.
    *
@@ -271,8 +256,6 @@ class FileFunctions {
    * ************************************************************************ */
 
   /**
-   * Función getNamesOriginals().
-   *
    * Obtiene los nombres originales de los ficheros de una ruta
    * (no corregidos a UTF-8).
    *
@@ -304,10 +287,7 @@ class FileFunctions {
   }
 
   /**
-   * Función dateCompare().
-   *
-   * Devuelve la resta de dos fechas para saber
-   * cual es la mayor.
+   * Devuelve la resta de dos fechas para saber cual es la mayor.
    *
    * @param int $a
    *   Primera fecha a comparar.

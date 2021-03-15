@@ -15,9 +15,7 @@ use Symfony\Component\HttpFoundation\Request;
 class ParamsFunctions {
 
   /**
-   * Function obtainParams().
-   *
-   * Check if all params exist and return its values.
+   * Comprueba si existen todos los parámetros y devuelve su valor.
    *
    * @param Symfony\Component\HttpFoundation\Request $request
    *   Drupal Request (\Drupal::request())
@@ -29,8 +27,6 @@ class ParamsFunctions {
    * @return array|bool
    *   Array con los parámetros y su valor.
    *   FALSE si no se encuentra.
-   *
-   * @see README.md
    */
   public static function obtainParams(Request $request, array $params, string $method) {
 

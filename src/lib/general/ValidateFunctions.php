@@ -50,10 +50,7 @@ class ValidateFunctions {
   ];
 
   /**
-   * Función isValidIdNumber().
-   *
-   * Recibe un número de documento y lo comprueba con los
-   * tipos de documentos españoles.
+   * Recibe un número de documento y lo comprueba con los tipos españoles.
    *
    * @param string $docNumber
    *   El número de Identificación a comprobar.
@@ -72,8 +69,6 @@ class ValidateFunctions {
   }
 
   /**
-   * Función isValidUrl().
-   *
    * Recibe una url y verifica si tiene el formato correcto.
    *
    * @param string $url
@@ -101,8 +96,6 @@ class ValidateFunctions {
   }
 
   /**
-   * Función isValidEmailFormat().
-   *
    * Verifica que el formato coincide con un formato válido de email.
    *
    * @param string $email
@@ -116,7 +109,7 @@ class ValidateFunctions {
   }
 
   /**
-   * Función isValidEmail().
+   * Verificador de correo electrónico.
    *
    * Verifica que el formato coincide con un formato válido de email,
    * además verifica que el dominio cuenta con un registro MX.
@@ -145,8 +138,6 @@ class ValidateFunctions {
    * ************************************************************************ */
 
   /**
-   * Funcion isValidNif().
-   *
    * Valida el número del NIF con la letra.
    *
    * @param string $docNumber
@@ -180,8 +171,6 @@ class ValidateFunctions {
   }
 
   /**
-   * Funcion isValidNie().
-   *
    * Valida el número del NIE con la letra.
    *
    * @param string $docNumber
@@ -218,8 +207,6 @@ class ValidateFunctions {
   }
 
   /**
-   * Funcion isValidCif().
-   *
    * Valida el número del CIF con la letra.
    *
    * @param string $docNumber
@@ -246,8 +233,6 @@ class ValidateFunctions {
   }
 
   /**
-   * Funcion isValidNifFormat().
-   *
    * Valida el formato del número del NIF.
    *
    * @param string $docNumber
@@ -264,8 +249,6 @@ class ValidateFunctions {
   }
 
   /**
-   * Funcion isValidNieFormat().
-   *
    * Valida el formato del número del NIE.
    *
    * @param string $docNumber
@@ -282,8 +265,6 @@ class ValidateFunctions {
   }
 
   /**
-   * Funcion isValidCifFormat().
-   *
    * Valida el formato del número del CIF.
    *
    * @param string $docNumber
@@ -306,8 +287,6 @@ class ValidateFunctions {
   }
 
   /**
-   * Funcion getNifCheckDigit().
-   *
    * Obtiene la letra de check del número del NIF.
    *
    * @param string $docNumber
@@ -341,8 +320,6 @@ class ValidateFunctions {
   }
 
   /**
-   * Funcion getCifCheckDigit().
-   *
    * Obtiene la letra de check del número del CIF.
    *
    * @param string $docNumber
@@ -392,8 +369,6 @@ class ValidateFunctions {
   }
 
   /**
-   * Función respectsDocPattern().
-   *
    * Verifica que la cadena proporcionada respeta el patrón dado.
    *
    * @param string $givenString
@@ -418,8 +393,6 @@ class ValidateFunctions {
   }
 
   /**
-   * Función sumDigits().
-   *
    * Realiza el sumatorio del número proporcionado.
    *
    * @param int $digits
