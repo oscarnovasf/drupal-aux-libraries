@@ -1,7 +1,7 @@
 # Histórico de cambios
 >Todos los cambios notables de este proyecto se documentarán en este archivo.
 
-## [v0.0.4] - 2021-15-03
+## [v0.0.4] - 2021-03-15
 >Revisión
 ### Añadidos
 * Nuevos parámetros para la librería ***Mailing.php***.
