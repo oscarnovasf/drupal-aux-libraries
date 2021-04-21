@@ -1,6 +1,12 @@
 # Histórico de cambios
 >Todos los cambios notables de este proyecto se documentarán en este archivo.
 
+## [v0.0.5] - 2021-04-21
+>Revisión
+### Añadidos
+* Nueva librería ***MarkdownParser.php***.
+
+---
 ## [v0.0.4] - 2021-03-15
 >Revisión
 ### Añadidos

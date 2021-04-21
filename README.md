@@ -19,6 +19,9 @@ Librerías auxiliares para desarrollo de módulos en Drupal 8 y 9
 * ### src/lib/general/FtpFunctions.php
   Funciones relacionadas con la gestión de datos a través de conexiones FTP.
 
+* ### src/lib/general/MarkdownParser.php
+  Permiter renderizar archivos en Markdown como HTML.
+
 * ### src/lib/general/ParamsFunctions.php
   Captura y manipulación de parámetros (POST y GET) en Drupal.
 
@@ -58,8 +61,8 @@ momento.
 
 [mi-web]: https://oscarnovas.com "for developers"
 
-[version]: v0.0.4
-[version-badge]: https://img.shields.io/badge/version-0.0.4-blue.svg
+[version]: v0.0.5
+[version-badge]: https://img.shields.io/badge/version-0.0.5-blue.svg
 
 [license]: LICENSE.md
 [license-badge]: https://img.shields.io/github/license/oscarnovasf/drupal-aux-libraries "Leer la licencia"
