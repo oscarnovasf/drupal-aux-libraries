@@ -61,8 +61,8 @@ momento.
 
 [mi-web]: https://oscarnovas.com "for developers"
 
-[version]: v0.0.5
-[version-badge]: https://img.shields.io/badge/version-0.0.5-blue.svg
+[version]: v0.0.6
+[version-badge]: https://img.shields.io/badge/version-0.0.6-blue.svg
 
 [license]: LICENSE.md
 [license-badge]: https://img.shields.io/github/license/oscarnovasf/drupal-aux-libraries "Leer la licencia"

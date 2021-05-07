@@ -1,6 +1,16 @@
 # Histórico de cambios
 >Todos los cambios notables de este proyecto se documentarán en este archivo.
 
+## [v0.0.5] - 2021-05-07
+>Revisión
+### Añadidos
+* Se añade función a FileFunctions para listar los archivos de un directorio.
+* Se añade función a FileFunctions para mover un archivo.
+
+### Corrección de errores
+* Error con uno de los parámetros en una función de FileFunctions.php
+
+---
 ## [v0.0.5] - 2021-04-21
 >Revisión
 ### Añadidos

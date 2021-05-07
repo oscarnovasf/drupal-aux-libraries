@@ -54,16 +54,19 @@ class FileFunctions {
   }
 
   /**
-   * Devuelve el listado de archivos de un directorio (ordenado por fecha).
+   * Devuelve el contenido de un directorio (ordenado por fecha).
    *
    * @param string $realPath
    *   Ruta completa al directorio donde deseamos buscar.
    *   ( Ej. DRUPAL_ROOT . '/sites/default/privatefiles'; )
    *
    * @return array
-   *   Array con los nombres de los archivos.
+   *   Array con los nombres de los archivos y directorios.
    */
-  public static function getNamesByDateAsc(string $realPath) {
+  public static function getDirContentOrderByDateAsc(string $realPath) {
+    /* Variables auxiliares */
+    $files_return = [];
+    $array_filenames_dates = NULL;
 
     $dir_names = self::getNamesOriginals($realPath);
 
@@ -75,14 +78,59 @@ class FileFunctions {
         $array_filenames_dates[$i]['datetime'] = $datetime;
       }
 
-      usort($array_filenames_dates, 'self::dateCompare');
+      if (is_array($array_filenames_dates)) {
+        usort($array_filenames_dates, 'self::dateCompare');
 
-      foreach ($array_filenames_dates as $i => $resto) {
-        $dir_names[$i] = $array_filenames_dates[$i]['filename'];
+        foreach ($array_filenames_dates as $i => $resto) {
+          $files_return[$i] = $array_filenames_dates[$i]['filename'];
+        }
       }
     }
 
-    return $dir_names;
+    return $files_return;
+  }
+
+  /**
+   * Devuelve los archivos de un directorio (ordenado por fecha).
+   *
+   * Esta función excluye los directorios, únicamente listará los archivos
+   * de la ruta indicada.
+   *
+   * @param string $realPath
+   *   Ruta completa al directorio donde deseamos buscar.
+   *   ( Ej. DRUPAL_ROOT . '/sites/default/privatefiles'; )
+   *
+   * @return array
+   *   Array con los nombres de los archivos.
+   */
+  public static function getDirFilesOrderByDateAsc(string $realPath) {
+    /* Variables auxiliares */
+    $files_return = [];
+    $array_filenames_dates = NULL;
+
+    $dir_names = self::getNamesOriginals($realPath);
+
+    if (isset($dir_names[0])) {
+      foreach ($dir_names as $i => $resto) {
+        $file_name = $dir_names[$i];
+        if (!is_dir($realPath . '/' . $file_name)) {
+          $datetime = filemtime($realPath . '/' . $file_name);
+          $array_filenames_dates[$i]['filename'] = $file_name;
+          $array_filenames_dates[$i]['datetime'] = $datetime;
+        }
+      }
+
+      if (is_array($array_filenames_dates)) {
+        usort($array_filenames_dates, 'self::dateCompare');
+
+        foreach ($array_filenames_dates as $i => $resto) {
+          $files_return[$i] = $array_filenames_dates[$i]['filename'];
+        }
+      }
+
+    }
+
+    return $files_return;
   }
 
   /**
@@ -112,6 +160,30 @@ class FileFunctions {
   }
 
   /**
+   * Mueve un archivo de un directorio a otro.
+   *
+   * @param string $origen
+   *   Ruta completa al archivo origen.
+   * @param string $destino
+   *   Ruta completa al archivo destino.
+   *
+   * @return bool
+   *   TRUE si ha podido mover el archivo.
+   */
+  public static function moveFileTo(string $origen, string $destino) {
+    /* Variable de resultado */
+    $resultado = FALSE;
+
+    if (!is_dir($origen)) {
+      copy($origen, $destino);
+      unlink($origen);
+      $resultado = TRUE;
+    }
+
+    return $resultado;
+  }
+
+  /**
    * Genera un archivo de log a partir de un array.
    *
    * @param string $fileName
@@ -120,7 +192,7 @@ class FileFunctions {
    *   Array con el contenido para el archivo.
    */
   public static function createFileLog(string $fileName, array $fileContent) {
-    $myfile = fopen($fileName, "a+") or die("Unable to open file!");
+    $myfile = fopen($fileName, "a+");
 
     foreach ($fileContent as $row) {
       $content = implode(' => ', $row) . "\n";
@@ -289,15 +361,15 @@ class FileFunctions {
   /**
    * Devuelve la resta de dos fechas para saber cual es la mayor.
    *
-   * @param int $a
+   * @param array $a
    *   Primera fecha a comparar.
-   * @param int $b
+   * @param array $b
    *   Segunda fecha a comparar.
    *
    * @return int
    *   La diferencia entre las fechas.
    */
-  private static function dateCompare(int $a, int $b) {
+  private static function dateCompare(array $a, array $b) {
     $t1 = $a['datetime'];
     $t2 = $b['datetime'];
     return $t1 - $t2;
