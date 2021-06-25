@@ -10,6 +10,10 @@ Librerías auxiliares para desarrollo de módulos en Drupal 8 y 9
 
 ## Contenido
 
+* ### src/lib/generalCalendarLinkFunctions.php
+  Una serie de funciones que permiten generar un evento en los diferentes
+  sistemas de calendario (Google, Yahoo, Outlook...).
+
 * ### src/lib/general/DateTimeFunctions.php
   Una serie de funciones relacionadas con la gestión de fechas.
 
@@ -61,8 +65,8 @@ momento.
 
 [mi-web]: https://oscarnovas.com "for developers"
 
-[version]: v0.0.6
-[version-badge]: https://img.shields.io/badge/version-0.0.6-blue.svg
+[version]: v0.0.7
+[version-badge]: https://img.shields.io/badge/version-0.0.7-blue.svg
 
 [license]: LICENSE.md
 [license-badge]: https://img.shields.io/github/license/oscarnovasf/drupal-aux-libraries "Leer la licencia"

@@ -6,11 +6,6 @@ namespace Drupal\module_template\lib\general;
 // @codingStandardsIgnoreStart
 
 /**
- * @file
- * MarkdownParser.php.
- */
-
- /**
  * Adaptación de la librería Parsedown.
  *
  * Permite renderizar como HTML un archivo en formato Markdown.

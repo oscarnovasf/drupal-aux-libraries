@@ -3,11 +3,6 @@
 namespace Drupal\module_template\lib\general;
 
 /**
- * @file
- * Librería FileFunctions.
- */
-
-/**
  * Funciones para gestionar archivos y directorios.
  */
 class FileFunctions {

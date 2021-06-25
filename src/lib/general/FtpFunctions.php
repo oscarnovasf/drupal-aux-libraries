@@ -3,11 +3,6 @@
 namespace Drupal\module_template\lib\general;
 
 /**
- * @file
- * Librería FtpFunctions.
- */
-
-/**
  * Funciones para gestionar archivos y directorios a través de FTP.
  */
 class FtpFunctions {

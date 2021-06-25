@@ -1,7 +1,20 @@
 # Histórico de cambios
 >Todos los cambios notables de este proyecto se documentarán en este archivo.
 
-## [v0.0.5] - 2021-05-07
+## [v0.0.7] - 2021-06-25
+>Revisión
+### Añadidos
+* Nueva librería ***CalendarLinkFunctions.php*** para gestión de creación de
+  eventos en diferentes calendarios (Google, Yahoo, Outlook, ICS...).
+
+### Corrección de errores
+* Error en la cláusula uses de ***DateTimeFunctions.php***.
+
+### Modificados
+* Mejora de los comentarios en los archivos de las librerías.
+
+---
+## [v0.0.6] - 2021-05-07
 >Revisión
 ### Añadidos
 * Se añade función a FileFunctions para listar los archivos de un directorio.

@@ -2,11 +2,6 @@
 
 namespace Drupal\module_template\lib\general;
 
-/**
- * @file
- * Librería ResponseFunctions.
- */
-
 use Drupal\Core\Cache\CacheableJsonResponse;
 
 /**

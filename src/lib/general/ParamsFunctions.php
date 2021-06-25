@@ -2,11 +2,6 @@
 
 namespace Drupal\module_template\lib\general;
 
-/**
- * @file
- * Librería ParamsFunctions.
- */
-
 use Symfony\Component\HttpFoundation\Request;
 
 /**

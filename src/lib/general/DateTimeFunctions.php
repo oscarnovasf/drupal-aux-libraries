@@ -3,13 +3,6 @@
 namespace Drupal\module_template\lib\general;
 
 /**
- * @file
- * Librería DateTimeFunctions.
- */
-
-use DateTime;
-
-/**
  * Funciones para gestionar archivos y directorios.
  */
 class DateTimeFunctions {
@@ -29,8 +22,8 @@ class DateTimeFunctions {
     /* Cadena a ser retornada */
     $resultado = '';
 
-    $start_date = new DateTime($fecha . " " . $hora);
-    $since_start = $start_date->diff(new DateTime(date("Y-m-d") . " " . date("H:i:s")));
+    $start_date = new \DateTime($fecha . " " . $hora);
+    $since_start = $start_date->diff(new \DateTime(date("Y-m-d") . " " . date("H:i:s")));
     $resultado .= "Hace ";
     if ($since_start->y == 0) {
       if ($since_start->m == 0) {

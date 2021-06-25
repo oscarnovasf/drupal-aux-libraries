@@ -3,11 +3,6 @@
 namespace Drupal\module_template\lib\general;
 
 /**
- * @file
- * Librería StringFunctions.
- */
-
-/**
  * Funciones para trabajar con cadenas de texto.
  */
 class StringFunctions {

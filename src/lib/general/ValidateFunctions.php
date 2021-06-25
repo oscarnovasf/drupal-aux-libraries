@@ -3,11 +3,6 @@
 namespace Drupal\module_template\lib\general;
 
 /**
- * @file
- * Librería ValidateFunctions.
- */
-
-/**
  * Funciones de validación de datos.
  */
 class ValidateFunctions {
