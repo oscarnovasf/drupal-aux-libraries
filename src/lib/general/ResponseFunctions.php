@@ -3,6 +3,7 @@
 namespace Drupal\module_template\lib\general;
 
 use Drupal\Core\Cache\CacheableJsonResponse;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 /**
  * Funciones para ser usadas como retorno de otras funciones.
@@ -108,6 +109,21 @@ class ResponseFunctions {
     $response['response'] = $this->response;
 
     $returnValue = new CacheableJsonResponse($response);
+    return $returnValue;
+  }
+
+  /**
+   * Devuelve todas las propiedades en formato Json.
+   *
+   * @return Symfony\Component\HttpFoundation\JsonResponse
+   *   Json.
+   */
+  public function getJsonNoCacheable() {
+    $response = [];
+    $response['status'] = $this->status;
+    $response['response'] = $this->response;
+
+    $returnValue = new JsonResponse($response);
     return $returnValue;
   }
 

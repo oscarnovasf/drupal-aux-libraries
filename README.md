@@ -6,6 +6,7 @@ Librerías auxiliares para desarrollo de módulos en Drupal 8 y 9
 
 [![version][version-badge]][changelog]
 [![Licencia][license-badge]][license]
+[![Código de conducta][conduct-badge]][conduct]
 [![Donate][donate-badge]][donate-url]
 
 ## Contenido
@@ -65,14 +66,17 @@ momento.
 
 [mi-web]: https://oscarnovas.com "for developers"
 
-[version]: v0.0.7
-[version-badge]: https://img.shields.io/badge/version-0.0.7-blue.svg
+[version]: v0.0.8
+[version-badge]: https://img.shields.io/badge/version-0.0.8-blue.svg
 
 [license]: LICENSE.md
-[license-badge]: https://img.shields.io/github/license/oscarnovasf/drupal-aux-libraries "Leer la licencia"
+[license-badge]: https://img.shields.io/badge/Licencia-GPLv3+-green.svg "Leer la licencia"
+
+[conduct]: CODE_OF_CONDUCT.md
+[conduct-badge]: https://img.shields.io/badge/Contributor%20Covenant-2.0-4baaaa.svg "Código de conducta"
 
 [changelog]: CHANGELOG.md "Histórico de cambios"
-[contributors]: https://github.com/oscarnovasf/drupal-aux-libraries/contributors "Ver contribuyentes"
+[contributors]: https://github.com/oscarnovasf/vscode_config/contributors "Ver contribuyentes"
 
-[donate-badge]: https://img.shields.io/badge/Donate-PayPal-green.svg
+[donate-badge]: https://img.shields.io/badge/Donaci%C3%B3n-PayPal-red.svg
 [donate-url]: https://paypal.me/oscarnovasf "Haz una donación"

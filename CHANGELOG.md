@@ -1,6 +1,13 @@
 # Histórico de cambios
 >Todos los cambios notables de este proyecto se documentarán en este archivo.
 
+## [v0.0.8] - 2021-10-27
+>Revisión
+### Añadidos
+* Nueva función en ***ResponseFunctions.php*** para obtener el resultado sin
+  caché.
+
+---
 ## [v0.0.7] - 2021-06-25
 >Revisión
 ### Añadidos
