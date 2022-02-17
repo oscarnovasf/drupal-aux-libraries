@@ -2,6 +2,8 @@
 
 namespace Drupal\module_template\lib\general;
 
+use SimpleXMLElement;
+
 /**
  * Funciones para gestionar archivos y directorios.
  */
@@ -18,7 +20,7 @@ class FileFunctions {
    *
    * @param string $realPath
    *   Ruta completa al directorio donde deseamos buscar.
-   *   ( Ej. DRUPAL_ROOT . '/sites/default/privatefiles'; )
+   *   ( Ej. DRUPAL_ROOT . '/sites/default/private_files'; )
    * @param int $timeStamp
    *   Fecha límite hasta la que se borran los archivos.
    *   ( Ej. strtotime('-6 hour', time()); )
@@ -53,7 +55,7 @@ class FileFunctions {
    *
    * @param string $realPath
    *   Ruta completa al directorio donde deseamos buscar.
-   *   ( Ej. DRUPAL_ROOT . '/sites/default/privatefiles'; )
+   *   ( Ej. DRUPAL_ROOT . '/sites/default/private_files'; )
    *
    * @return array
    *   Array con los nombres de los archivos y directorios.
@@ -187,20 +189,20 @@ class FileFunctions {
    *   Array con el contenido para el archivo.
    */
   public static function createFileLog(string $fileName, array $fileContent) {
-    $myfile = fopen($fileName, "a+");
+    $my_file = fopen($fileName, "a+");
 
     foreach ($fileContent as $row) {
       $content = implode(' => ', $row) . "\n";
-      fwrite($myfile, $content);
+      fwrite($my_file, $content);
     }
 
-    fclose($myfile);
+    fclose($my_file);
   }
 
   /**
    * Obtiene el contenido de un directorio excluyendo las carpetas del sistema.
    *
-   * Las carpetas excluídas son:
+   * Las carpetas excluidas son:
    * (. y ..)
    *
    * @param string $real_path
@@ -318,6 +320,38 @@ class FileFunctions {
     rmdir($target);
   }
 
+  /**
+   * Convierte un archivo XML/HTML en array.
+   *
+   * @param \SimpleXMLElement $buffer
+   *   Contenido a procesar.
+   *
+   * @return array
+   *   Array con el contenido del fichero.
+   */
+  public static function xml2Array(SimpleXMLElement $buffer) {
+    /* Ejemplo de llamada a la función:
+     * $buffer = file_get_contents($ruta);
+     * $pos = strpos($buffer, '<table>');
+     * $buffer = substr($buffer, $pos, strlen($buffer));
+     *
+     * $buffer = strip_tags($buffer, "<table><tr><td>");
+     * $buffer = preg_replace('/<(\w+)[^>]*>/', '<$1>', $buffer);
+     *
+     * $buffer = "<?xml version='1.0'?><document>" . PHP_EOL . trim($buffer) . '</document>';
+     *
+     * $xml = simplexml_load_string($buffer, "SimpleXMLElement", LIBXML_NOCDATA);
+     * $contenido = FileFunctions::xml2Array($xml);
+     * ksm($contenido);
+     */
+    $array = [];
+
+    $json = json_encode($buffer);
+    $array = json_decode($json, TRUE);
+
+    return $array;
+  }
+
   /* ***************************************************************************
    * FUNCIONES PRIVADAS.
    * ************************************************************************ */
@@ -328,7 +362,7 @@ class FileFunctions {
    *
    * @param string $realPath
    *   Ruta completa al directorio donde deseamos buscar.
-   *   ( Ej. DRUPAL_ROOT . '/sites/default/privatefiles'; )
+   *   ( Ej. DRUPAL_ROOT . '/sites/default/private_files'; )
    *
    * @return array
    *   Array con los nombres de los archivos.
@@ -341,7 +375,7 @@ class FileFunctions {
       $i = 0;
       while (FALSE !== ($file_name = readdir($gestor))) {
 
-        /* Excluímos los nombres de archivo que estén presentes en EXCLUDE_LIST */
+        /* Excluimos los nombres de archivo que estén presentes en EXCLUDE_LIST */
         if (!in_array($file_name, self::EXCLUDE_LIST)) {
           $dir_filenames[] = $file_name;
         }

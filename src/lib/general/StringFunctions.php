@@ -251,6 +251,32 @@ class StringFunctions {
     return preg_replace('/(<[^>]+) style=".*?"/i', '$1', $str);
   }
 
+  /**
+   * Elimina todas los espacios extra de la cadena.
+   *
+   * @param string $str
+   *   Cadena a modificar.
+   *
+   * @return string
+   *   Cadena sin espacios adicionales.
+   */
+  public static function completeTrim(string $str) {
+    return preg_replace(['/\s+/', '/^\s|\s$/'], [' ', ''], $str);
+  }
+
+  /**
+   * Elimina todas los saltos de línea de la cadena.
+   *
+   * @param string $str
+   *   Cadena a modificar.
+   *
+   * @return string
+   *   Cadena sin saltos de línea.
+   */
+  public static function removeBreakLines(string $str) {
+    return preg_replace("[\n|\r|\n\r]", " ", $str);
+  }
+
   /* ***************************************************************************
    * FUNCIONES PRIVADAS.
    * ************************************************************************ */

@@ -1,6 +1,15 @@
 # Histórico de cambios
 >Todos los cambios notables de este proyecto se documentarán en este archivo.
 
+## [v0.0.9] - 2022-02-17
+>Revisión
+### Añadidos
+* Nueva función en ***FileFunctions.php*** para obtener un array a partir de
+  un archivo en formato XML.
+* Nuevas funciones en ***StringFunctions.php*** para eliminar espacios entre
+  palabras y eliminar saltos de línea.
+
+---
 ## [v0.0.8] - 2021-10-27
 >Revisión
 ### Añadidos
