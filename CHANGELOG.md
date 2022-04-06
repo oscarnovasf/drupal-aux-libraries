@@ -1,6 +1,18 @@
 # Histórico de cambios
 >Todos los cambios notables de este proyecto se documentarán en este archivo.
 
+## [v0.1.0] - 2022-04-06
+>Revisión
+### Añadidos
+* Nueva función en ***StringFunctions.php*** para eliminar BOM.
+* Nueva librería para crear elementos multiples en formularios
+  ***MultiValue.php***.
+
+### Corrección de errores
+* Error en getResponse en ***ResponseFunctions.php*** cuando no se indicaba la
+  key a devolver.
+
+---
 ## [v0.0.9] - 2022-02-17
 >Revisión
 ### Añadidos
