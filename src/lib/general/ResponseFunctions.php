@@ -89,7 +89,7 @@ class ResponseFunctions {
    *   Si $key está definido y existe devuelve el valor almacenado.
    */
   public function getResponse(string $key = NULL) {
-    if (array_key_exists($key, $this->response) or !empty($key)) {
+    if (array_key_exists($key, $this->response) or empty($key)) {
       return $key ? $this->response[$key] : $this->response;
     }
     else {

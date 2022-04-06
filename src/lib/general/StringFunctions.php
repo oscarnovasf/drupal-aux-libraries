@@ -277,6 +277,21 @@ class StringFunctions {
     return preg_replace("[\n|\r|\n\r]", " ", $str);
   }
 
+  /**
+   * Elimina los caracteres de BOM de una cadena.
+   *
+   * @param string $text
+   *   Cadena a normalizar.
+   *
+   * @return string
+   *   Cadena normalizada.
+   */
+  public function removeUtf8Bom(string $text) {
+    $bom = pack('H*', 'EFBBBF');
+    $text = preg_replace("/^$bom/", '', $text);
+    return $text;
+  }
+
   /* ***************************************************************************
    * FUNCIONES PRIVADAS.
    * ************************************************************************ */

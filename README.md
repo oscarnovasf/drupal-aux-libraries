@@ -11,6 +11,9 @@ Librerías auxiliares para desarrollo de módulos en Drupal 8 y 9
 
 ## Contenido
 
+* ### src/Element/MultiValue.php
+  Permite generar elementos múltiples en un formulario vía Form API.
+
 * ### src/lib/generalCalendarLinkFunctions.php
   Una serie de funciones que permiten generar un evento en los diferentes
   sistemas de calendario (Google, Yahoo, Outlook...).
@@ -66,8 +69,8 @@ momento.
 
 [mi-web]: https://oscarnovas.com "for developers"
 
-[version]: v0.0.9
-[version-badge]: https://img.shields.io/badge/version-0.0.9-blue.svg
+[version]: v0.1.0
+[version-badge]: https://img.shields.io/badge/version-0.1.0-blue.svg
 
 [license]: LICENSE.md
 [license-badge]: https://img.shields.io/badge/Licencia-GPLv3+-green.svg "Leer la licencia"
