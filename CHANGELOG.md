@@ -1,6 +1,17 @@
 # Histórico de cambios
 >Todos los cambios notables de este proyecto se documentarán en este archivo.
 
+## [v0.1.1] - 2022-04-11
+>Revisión
+### Añadidos
+* Ahora se permite el uso de contenedores dentro de los campos múltiples en la
+  librería ***MultiValue.php***.
+
+### Corrección de errores
+* Problema con los campos `entity_autocomplete` en la librería
+  ***MultiValue.php***.
+
+---
 ## [v0.1.0] - 2022-04-06
 >Revisión
 ### Añadidos

@@ -84,8 +84,6 @@ use Drupal\Core\Render\Element\FormElement;
  *
  * @FormElement("multi-value")
  *
- * @todo No permite anidar contenedores dentro del multi-value. Error al asignar
- * los valores por defecto.
  * @todo Incluir botón para eliminar elemento.
  *
  * @see https://www.drupal.org/project/multivalue_form_element
@@ -352,10 +350,24 @@ class MultiValue extends FormElement {
    *   Array de valores. Cada clave se corresponde al nombre del elemento hijo.
    */
   public static function setDefaultValue(array &$elements, array $value): void {
-    /* TODO: Comprobar si tiene más niveles de hijos */
     foreach (Element::children($elements, FALSE) as $child) {
       if (isset($value[$child])) {
-        $elements[$child]['#default_value'] = $value[$child];
+        if ($elements[$child]['#type'] == 'entity_autocomplete') {
+          $entity = \Drupal::entityTypeManager()
+            ->getStorage($elements[$child]['#target_type'])
+            ->load($value[$child]);
+          if (is_object($entity)) {
+            $elements[$child]['#default_value'] = $entity;
+          }
+        }
+        else {
+          if (Element::children($elements[$child], FALSE)) {
+            self::setDefaultValue($elements[$child], $value[$child]);
+          }
+          else {
+            $elements[$child]['#default_value'] = $value[$child];
+          }
+        }
       }
     }
   }
