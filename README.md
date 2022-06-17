@@ -21,6 +21,9 @@ Librerías auxiliares para desarrollo de módulos en Drupal 8 y 9
 * ### src/lib/general/DateTimeFunctions.php
   Una serie de funciones relacionadas con la gestión de fechas.
 
+* ### src/lib/general/DrupalLog.php
+  Una serie de funciones relacionadas con la gestión de logs.
+
 * ### src/lib/general/FileFunctions.php
   Una serie de funciones relacionadas con la gestión de ficheros.
 
@@ -69,8 +72,8 @@ momento.
 
 [mi-web]: https://oscarnovas.com "for developers"
 
-[version]: v0.1.1
-[version-badge]: https://img.shields.io/badge/version-0.1.1-blue.svg
+[version]: v0.1.2
+[version-badge]: https://img.shields.io/badge/version-0.1.2-blue.svg
 
 [license]: LICENSE.md
 [license-badge]: https://img.shields.io/badge/Licencia-GPLv3+-green.svg "Leer la licencia"

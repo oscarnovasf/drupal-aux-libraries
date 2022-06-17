@@ -1,6 +1,15 @@
 # Histórico de cambios
 >Todos los cambios notables de este proyecto se documentarán en este archivo.
 
+## [v0.1.2] - 2022-06-17
+>Revisión
+### Añadidos
+* Librería ***DrupalLog***.
+
+### Modificados
+* Refactor de la función `getResponse` en ***ResponseFunctions***.
+
+---
 ## [v0.1.1] - 2022-04-11
 >Revisión
 ### Añadidos
