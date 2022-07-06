@@ -22,6 +22,26 @@ class ResponseFunctions {
   protected $status;
 
   /**
+   * Propiedad error.
+   *
+   * Almacena el posible texto de error.
+   *
+   * @var string|null
+   *   Texto del error.
+   */
+  protected $error;
+
+  /**
+   * Propiedad errorCode.
+   *
+   * Almacena el posible número de error.
+   *
+   * @var int|null
+   *   Código del error.
+   */
+  protected $errorCode;
+
+  /**
    * Propiedad response.
    *
    * Array que contiene los mensajes de errores en caso que $status = FALSE
@@ -42,6 +62,8 @@ class ResponseFunctions {
    */
   public function __construct() {
     $this->setStatus(FALSE);
+    $this->error = NULL;
+    $this->errorCode = NULL;
   }
 
   /**
@@ -63,6 +85,48 @@ class ResponseFunctions {
    */
   public function getStatus() {
     return $this->status;
+  }
+
+  /**
+   * Establece el valor de "error".
+   *
+   * @param string $error
+   *   Cadena con el texto del error.
+   */
+  public function setError(string $error) {
+    $this->error = $error;
+  }
+
+  /**
+   * Devuelve el valor de "error".
+   *
+   * @return string|null
+   *   Cadena con el texto del error.
+   *   NULL si el error no ha sido definido.
+   */
+  public function getError() {
+    return $this->error;
+  }
+
+  /**
+   * Establece el valor de "errorCode".
+   *
+   * @param int $error
+   *   Código del error.
+   */
+  public function setErrorCode(int $error) {
+    $this->errorCode = $error;
+  }
+
+  /**
+   * Devuelve el valor de "errorCode".
+   *
+   * @return int|null
+   *   Código del error.
+   *   NULL si el error no ha sido definido.
+   */
+  public function getErrorCode() {
+    return $this->errorCode;
   }
 
   /**
@@ -104,6 +168,8 @@ class ResponseFunctions {
   public function getJson() {
     $response = [];
     $response['status'] = $this->status;
+    $response['error']['code'] = $this->errorCode;
+    $response['error']['message'] = $this->error;
     $response['response'] = $this->response;
 
     $returnValue = new CacheableJsonResponse($response);
@@ -119,6 +185,8 @@ class ResponseFunctions {
   public function getJsonNoCacheable() {
     $response = [];
     $response['status'] = $this->status;
+    $response['error']['code'] = $this->errorCode;
+    $response['error']['message'] = $this->error;
     $response['response'] = $this->response;
 
     $returnValue = new JsonResponse($response);

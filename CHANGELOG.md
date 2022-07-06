@@ -1,6 +1,16 @@
 # Histórico de cambios
 >Todos los cambios notables de este proyecto se documentarán en este archivo.
 
+## [v0.1.3] - 2022-07-06
+>Revisión
+### Añadidos
+* Nuevas funciones de validación de datos.
+* Manejo de errores en ResponseFunctions.
+
+### Corrección de errores
+* Eliminación de funciones obsoletas de php.
+
+---
 ## [v0.1.2] - 2022-06-17
 >Revisión
 ### Añadidos

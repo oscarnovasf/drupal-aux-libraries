@@ -64,6 +64,26 @@ class ValidateFunctions {
   }
 
   /**
+   * Verifica si es un color hexadecimal válido.
+   *
+   * @param string $color
+   *   Color a verificar.
+   *
+   * @return string|bool
+   *   Devuelve el color o FALSE si no es un color válido.
+   */
+  public static function isHexColor(string $color) {
+    if (preg_match('/^#[a-f0-9]{6}$/i', $color)) {
+      return $color;
+    }
+    elseif (preg_match('/^[a-f0-9]{6}$/i', $color)) {
+      return '#' . $color;
+    }
+
+    return FALSE;
+  }
+
+  /**
    * Recibe una url y verifica si tiene el formato correcto.
    *
    * @param string $url
@@ -121,8 +141,8 @@ class ValidateFunctions {
     $result = self::isValidEmailFormat($email);
 
     if ($result) {
-      list($user, $domain) = split('@', $email);
-      $result = checkdnsrr($domain, 'MX');
+      $data = explode('@', $email);
+      $result = checkdnsrr($data[1], 'MX');
     }
 
     return $result;
