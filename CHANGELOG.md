@@ -1,6 +1,21 @@
 # Histórico de cambios
 >Todos los cambios notables de este proyecto se documentarán en este archivo.
 
+## [v0.1.4] - 2024-12-02
+>Revisión
+### Añadidos
+* Nuevas funciones de ficheros (descarga con curl desde url).
+* Corrección de errores de phpcs.
+* Nueva función para realizar log de objetos.
+* Nuevos parámetros de configuración en MultiValue.
+* Nueva librería para trabajar con XML.
+* Nueva función para validar códigos postales españoles.
+
+### Modificados
+* Corrección del código en Mailing.php.
+* Pequeño ajuste en CalendarLinkFunctions en la gestión de archivos.
+
+---
 ## [v0.1.3] - 2022-07-06
 >Revisión
 ### Añadidos

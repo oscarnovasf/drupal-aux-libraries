@@ -2,6 +2,7 @@
 
 namespace Drupal\module_template\lib\general;
 
+// phpcs:ignore
 use SimpleXMLElement;
 
 /**
@@ -192,7 +193,12 @@ class FileFunctions {
     $my_file = fopen($fileName, "a+");
 
     foreach ($fileContent as $row) {
-      $content = implode(' => ', $row) . "\n";
+      if (is_array($row)) {
+        $content = implode(' => ', $row) . "\n";
+      }
+      else {
+        $content = $row . "\n";
+      }
       fwrite($my_file, $content);
     }
 
@@ -292,6 +298,8 @@ class FileFunctions {
 
     $clean = trim(str_replace($strip, "", strip_tags($filename)));
     $clean = preg_replace('/\s+/', "-", $clean);
+    $clean = preg_replace('/[^a-z0-9_.-]+/', '_', $clean);
+
     return ($force_lowercase) ?
         (function_exists('mb_strtolower')) ?
           mb_strtolower($clean, 'UTF-8') :
@@ -350,6 +358,30 @@ class FileFunctions {
     $array = json_decode($json, TRUE);
 
     return $array;
+  }
+
+  /**
+   * Obtiene el contenido de un fichero vía curl.
+   *
+   * @param string $url
+   *   Url del fichero.
+   *
+   * @return string
+   *   Cadena con el contenido del fichero.
+   */
+  public static function fileGetContentsCurl(string $url) {
+    $ch = curl_init();
+
+    curl_setopt($ch, CURLOPT_AUTOREFERER, TRUE);
+    curl_setopt($ch, CURLOPT_HEADER, 0);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, TRUE);
+
+    $data = curl_exec($ch);
+    curl_close($ch);
+
+    return $data;
   }
 
   /* ***************************************************************************

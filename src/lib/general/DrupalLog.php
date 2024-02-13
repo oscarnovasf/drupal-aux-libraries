@@ -45,24 +45,21 @@ class DrupalLog {
                           $args[1] ?? 'info',
                           $args[2] ?? NULL);
         }
-        /* Si no es un array será un string, llamo a logString */
+        /* Si el primer argumento es un string, llamo a logString */
         elseif (is_string($args[0])) {
           $this->logString($args[0],
                            $args[1] ?? 'info',
                            $args[2] ?? NULL);
         }
+        /* Si el primer argumento es un objeto, lo convierto en array y llamo a
+         * logArray */
+        elseif ($args[0] instanceof \stdClass) {
+          $this->logArray($this->arrayCastRecursive($args[0]),
+                          $args[1] ?? 'info',
+                          $args[2] ?? NULL);
+        }
       }
     }
-  }
-
-  /**
-   * Obtiene el nombre del módulo que llama a la función.
-   *
-   * @return string
-   *   Nombre del módulo.
-   */
-  public function getModuleName() {
-    return $this->moduleName;
   }
 
   /**
@@ -89,17 +86,17 @@ class DrupalLog {
     $validate_type = $this->prepareType($type);
 
     /* Valido la categoría a usar */
-    $use_category = $this->moduleName;
+    $use_category = $this->getModuleName();
     if ($category) {
       $use_category = $category;
     }
 
     /* Añado los valores por defecto */
-    $user = User::load(\Drupal::currentUser()->id());
+    $user = \Drupal::currentUser();
     $backtrace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS);
     $log['user'] = [
       'id' => $user->id(),
-      'name' => $user->get('name')->value,
+      'name' => $user->getAccountName(),
     ];
     $log['backtrace'] = $backtrace[1] ?? [];
     $log['content'] = $content;
@@ -135,6 +132,32 @@ class DrupalLog {
   }
 
   /**
+   * Genera un array recursivo a partir de un objeto.
+   *
+   * @param array|object $array
+   *   Array o objeto a convertir.
+   *
+   * @return array
+   *   Array convertido.
+   */
+  private function arrayCastRecursive($array): array {
+    if (is_array($array)) {
+      foreach ($array as $key => $value) {
+        if (is_array($value)) {
+          $array[$key] = $this->arrayCastRecursive($value);
+        }
+        if ($value instanceof \stdClass) {
+          $array[$key] = $this->arrayCastRecursive((array) $value);
+        }
+      }
+    }
+    if ($array instanceof \stdClass) {
+      return $this->arrayCastRecursive((array) $array);
+    }
+    return $array;
+  }
+
+  /**
    * Verifica que el tipo de mensaje proporcionado sea válido.
    *
    * @param string $type
@@ -167,6 +190,16 @@ class DrupalLog {
     }
 
     return $type_lowercase;
+  }
+
+  /**
+   * Obtiene el nombre del módulo que llama a la función.
+   *
+   * @return string
+   *   Nombre del módulo.
+   */
+  private function getModuleName(): string {
+    return $this->moduleName;
   }
 
 }

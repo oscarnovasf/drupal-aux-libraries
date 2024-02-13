@@ -46,6 +46,9 @@ Librerías auxiliares para desarrollo de módulos en Drupal 8 y 9
 * ### src/lib/general/ValidateFunctions.php
   Funciones de validación de datos como pueden ser DNI, CIF, NIE...
 
+* ### src/lib/general/XmlParser.php
+  Para convertir un string XML en un array.
+
 * ### src/lib/Mailing.php
   Facilita el envío de correos electrónicos.
 
@@ -72,8 +75,8 @@ momento.
 
 [mi-web]: https://oscarnovas.com "for developers"
 
-[version]: v0.1.3
-[version-badge]: https://img.shields.io/badge/version-0.1.3-blue.svg
+[version]: v0.1.4
+[version-badge]: https://img.shields.io/badge/version-0.1.4-blue.svg
 
 [license]: LICENSE.md
 [license-badge]: https://img.shields.io/badge/Licencia-GPLv3+-green.svg "Leer la licencia"

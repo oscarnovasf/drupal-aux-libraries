@@ -30,7 +30,11 @@ class CalendarLinkFunctions {
    * @return string
    *   Cadena con la url del enlace.
    */
-  public function linkGoogle(string $name, int $begin, int $end, string $location, string $details) {
+  public function linkGoogle(string $name,
+                             int $begin,
+                             int $end,
+                             string $location,
+                             string $details) {
     /* Parámetros que debo añadir a la url de google calendar */
     $params = [
       '&dates=',
@@ -74,7 +78,11 @@ class CalendarLinkFunctions {
    * @return string
    *   Cadena con la url del enlace.
    */
-  public function linkYahoo(string $name, int $begin, int $end, string $location, string $details) {
+  public function linkYahoo(string $name,
+                            int $begin,
+                            int $end,
+                            string $location,
+                            string $details) {
     /* Parámetros que debo añadir a la url de yahoo calendar */
     $params = [
       '&st=',
@@ -118,7 +126,11 @@ class CalendarLinkFunctions {
    * @return string
    *   Cadena con la url del enlace.
    */
-  public function linkOutlookWeb(string $name, int $begin, int $end, string $location, string $details) {
+  public function linkOutlookWeb(string $name,
+                                 int $begin,
+                                 int $end,
+                                 string $location,
+                                 string $details) {
     /* Parámetros que debo añadir a la url de outlook calendar (web) */
     $params = [
       '&startdt=',
@@ -158,11 +170,18 @@ class CalendarLinkFunctions {
    *   Cadena con la dirección del evento.
    * @param string $details
    *   Cadena con los detalles del evento.
+   * @param bool $open
+   *   Indica si se quiere abrir el archivo en lugar de descargarlo.
    *
    * @return string
    *   Url que apunta al archivo generado.
    */
-  public function linkIcs(string $name, int $begin, int $end, string $location, string $details) {
+  public function linkIcs(string $name,
+                          int $begin,
+                          int $end,
+                          string $location,
+                          string $details,
+                          bool $open = FALSE) {
 
     /* Datos para el archivo */
     $url = [
@@ -190,14 +209,15 @@ class CalendarLinkFunctions {
       'END:VCALENDAR',
     ];
 
-    /* Descomentar esta línea si se quisiera sacar el archivo directamente */
-    /* $file_content = 'data:text/calendar;charset=utf8;base64,' . base64_encode(implode("\r\n", $url)); */
-
     $file_content = implode("\r\n", $url);
+    if ($open) {
+      $file_content = 'data:text/calendar;charset=utf8;base64,' . base64_encode(implode("\r\n", $url));
+    }
 
     /* Guardo el archivo .ics */
     $directory = \Drupal::config('system.file')->get('default_scheme') . '://calendario-eventos';
-    \Drupal::service('file_system')->prepareDirectory($directory, FileSystemInterface::CREATE_DIRECTORY | FileSystemInterface::MODIFY_PERMISSIONS);
+    $options = FileSystemInterface::CREATE_DIRECTORY | FileSystemInterface::MODIFY_PERMISSIONS;
+    \Drupal::service('file_system')->prepareDirectory($directory, $options);
 
     $file_name = str_replace(' ', '_', trim($name));
     $file_name = str_replace('¡', '', $file_name);

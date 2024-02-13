@@ -68,8 +68,8 @@ class Mailing {
     $message = $parametros['message'];
 
     /* Compruebo si se han pasado valores para CC o BCC */
-    $params['Cc'] = isset($parametros['cc']) ? $parametros['cc'] : NULL;
-    $params['Bcc'] = isset($parametros['bcc']) ? $parametros['bcc'] : NULL;
+    $params['Cc'] = $parametros['cc'] ?? NULL;
+    $params['Bcc'] = $parametros['bcc'] ?? NULL;
 
     /* Modificaciones propias de cada $key usado */
     switch ($key) {

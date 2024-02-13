@@ -64,6 +64,28 @@ class ValidateFunctions {
   }
 
   /**
+   * Recibe un código postal y lo comprueba con los tipos españoles.
+   *
+   * @param string $postal_code
+   *   El número a comprobar.
+   *
+   * @return bool
+   *   TRUE => Si el número es válido.
+   *   FALSE => Si el número es incorrecto.
+   */
+  public static function isValidPostalCode(string $postal_code) {
+    $re = '/^(?:0[1-9]|[1-4]\d|5[0-2])\d{3}$/';
+
+    preg_match($re, $postal_code, $matches, PREG_OFFSET_CAPTURE, 0);
+
+    if (count($matches) > 0) {
+      return TRUE;
+    }
+
+    return FALSE;
+  }
+
+  /**
    * Verifica si es un color hexadecimal válido.
    *
    * @param string $color

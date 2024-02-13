@@ -22,15 +22,31 @@ use Drupal\Core\Render\Element\FormElement;
  *   ilimitado.
  * - #add_more_label: etiqueta para el botón "add more". El valor por defecto es
  *   "Add another item".
+ * - #hide_weight: indica si se oculta el peso del elemento. El valor por
+ *   defecto es FALSE
  *
  * Ejemplo simple:
  * @code
  * $form['job_titles'] = [
- *   '#type' => 'multi-value',
+ *   '#type'  => 'multi-value',
  *   '#title' => $this->t('Job titles'),
- *   'title' => [
- *     '#type' => 'textfield',
- *     '#title' => $this->t('Job title'),
+ *   'title'  => [
+ *     '#type'          => 'textfield',
+ *     '#title'         => $this->t('Job title'),
+ *     '#title_display' => 'invisible',
+ *   ],
+ * ];
+ * @endcode
+ *
+ * Ejemplo simple ocultando el peso:
+ * @code
+ * $form['job_titles'] = [
+ *   '#type'        => 'multi-value',
+ *   '#title'       => $this->t('Job titles'),
+ *   '#hide_weight' => TRUE,
+ *   'title'        => [
+ *     '#type'          => 'textfield',
+ *     '#title'         => $this->t('Job title'),
  *     '#title_display' => 'invisible',
  *   ],
  * ];
@@ -39,15 +55,15 @@ use Drupal\Core\Render\Element\FormElement;
  * Ejemplo para campo compuesto:
  * @code
  * $form['contacts'] = [
- *   '#type' => 'multi-value',
- *   '#title' => $this->t('Contacts'),
+ *   '#type'        => 'multi-value',
+ *   '#title'       => $this->t('Contacts'),
  *   '#cardinality' => 3,
- *   'name' => [
- *     '#type' => 'textfield',
+ *   'name'         => [
+ *     '#type'  => 'textfield',
  *     '#title' => $this->t('Name'),
  *   ],
- *   'mail' => [
- *     '#type' => 'email',
+ *   'mail'         => [
+ *     '#type'  => 'email',
  *     '#title' => $this->t('E-mail'),
  *   ],
  * ];
@@ -56,7 +72,7 @@ use Drupal\Core\Render\Element\FormElement;
  * Ejemplo de cómo establecer valores por defecto:
  * @code
  * $form['contacts'] = [
- *   '#type' => 'multi-value',
+ *   '#type'          => 'multi-value',
  *   '#default_value' => [
  *     0 => ['name' => 'Bob', 'mail' => 'bob@example.com'],
  *     1 => ['name' => 'Ted', 'mail' => 'ted@example.com'],
@@ -68,15 +84,15 @@ use Drupal\Core\Render\Element\FormElement;
  * Ejemplo de cómo establecer campos obligatorios:
  * @code
  * $form['contacts'] = [
- *   '#type' => 'multi-value',
+ *   '#type'  => 'multi-value',
  *   '#title' => $this->t('Contacts'),
- *   'name' => [
- *     '#type' => 'textfield',
- *     '#title' => $this->t('Name'),
+ *   'name'   => [
+ *     '#type'     => 'textfield',
+ *     '#title'    => $this->t('Name'),
  *     '#required' => TRUE,
  *   ],
- *   'mail' => [
- *     '#type' => 'email',
+ *   'mail'   => [
+ *     '#type'  => 'email',
  *     '#title' => $this->t('E-mail'),
  *   ],
  * ];
@@ -101,17 +117,18 @@ class MultiValue extends FormElement {
   public function getInfo() {
     $class = get_class($this);
     return [
-      '#input' => TRUE,
-      '#theme' => 'field_multiple_value_form',
+      '#input'                => TRUE,
+      '#theme'                => 'field_multiple_value_form',
       '#cardinality_multiple' => TRUE,
-      '#description' => NULL,
-      '#cardinality' => self::CARDINALITY_UNLIMITED,
-      '#add_more_label' => $this->t('Add another item'),
-      '#process' => [
+      '#hide_weight'          => FALSE,
+      '#description'          => NULL,
+      '#cardinality'          => self::CARDINALITY_UNLIMITED,
+      '#add_more_label'       => $this->t('Add another item'),
+      '#process'              => [
         [$class, 'processMultiValue'],
         [$class, 'processAjaxForm'],
       ],
-      '#element_validate' => [
+      '#element_validate'     => [
         [$class, 'validateMultiValue'],
       ],
     ];
@@ -130,7 +147,9 @@ class MultiValue extends FormElement {
    * @return array
    *   Elemento procesado.
    */
-  public static function processMultiValue(array &$element, FormStateInterface $form_state, array &$form): array {
+  public static function processMultiValue(array &$element,
+                                           FormStateInterface $form_state,
+                                           array &$form): array {
     $element_name = end($element['#array_parents']);
     $parents = $element['#parents'];
     $cardinality = $element['#cardinality'];
@@ -159,6 +178,12 @@ class MultiValue extends FormElement {
     $value = is_array($element['#value']) ? $element['#value'] : [];
     $value = array_values($value);
 
+    $wrapper_id = NULL;
+    if ($cardinality === self::CARDINALITY_UNLIMITED && !$form_state->isProgrammed()) {
+      $id_prefix = implode('-', $parents);
+      $wrapper_id = Html::getUniqueId($id_prefix . '-add-more-wrapper');
+    }
+
     /* INFO: Si se desea que aparezca un elemento vacío por defecto basta con
      * cambiar la condición por $i <= $max */
     for ($i = 0; $i < $max; $i++) {
@@ -177,24 +202,31 @@ class MultiValue extends FormElement {
         '#default_value' => $i,
         '#weight' => 100,
       ];
+
+      if (TRUE == $element['#hide_weight']) {
+        $element[$i]['_weight']['#attributes']['style'][] = 'display: none;';
+      }
     }
 
-    if ($cardinality === self::CARDINALITY_UNLIMITED && !$form_state->isProgrammed()) {
-      $id_prefix = implode('-', $parents);
-      $wrapper_id = Html::getUniqueId($id_prefix . '-add-more-wrapper');
+    if ($wrapper_id) {
       $element['#prefix'] = '<div id="' . $wrapper_id . '">';
       $element['#suffix'] = '</div>';
+
+      /* Si se desea que se valide antes de crear un nuevo elemento añadimos:
+       * '#limit_validation_errors' => [$element['#array_parents']],
+       */
+      /* TODO: Generar limit_validation_errors como configuración del elemento */
       $element['add_more'] = [
-        '#type' => 'submit',
-        '#name' => strtr($id_prefix, '-', '_') . '_add_more',
-        '#value' => $element['#add_more_label'],
-        '#attributes' => ['class' => ['multivalue-add-more-submit']],
-        '#limit_validation_errors' => [$element['#array_parents']],
-        '#submit' => [[static::class, 'addMoreSubmit']],
-        '#ajax' => [
+        '#type'                    => 'submit',
+        '#name'                    => strtr($id_prefix, '-', '_') . '_add_more',
+        '#value'                   => $element['#add_more_label'],
+        '#attributes'              => ['class' => ['multivalue-add-more-submit']],
+        '#limit_validation_errors' => [],
+        '#submit'                  => [[static::class, 'addMoreSubmit']],
+        '#ajax'                    => [
           'callback' => [static::class, 'addMoreAjax'],
-          'wrapper' => $wrapper_id,
-          'effect' => 'fade',
+          'wrapper'  => $wrapper_id,
+          'effect'   => 'fade',
         ],
       ];
     }
@@ -260,7 +292,9 @@ class MultiValue extends FormElement {
   /**
    * {@inheritdoc}
    */
-  public static function valueCallback(&$element, $input, FormStateInterface $form_state) {
+  public static function valueCallback(&$element,
+                                       $input,
+                                       FormStateInterface $form_state) {
     if ($input !== FALSE) {
       return $input;
     }
@@ -298,7 +332,8 @@ class MultiValue extends FormElement {
    *
    * @see \Drupal\Core\Field\WidgetBase::addMoreSubmit()
    */
-  public static function addMoreSubmit(array $form, FormStateInterface $form_state): void {
+  public static function addMoreSubmit(array $form,
+                                       FormStateInterface $form_state): void {
     $button = $form_state->getTriggeringElement();
 
     /* Obtengo el contenedor del widget (uno arriba). */
@@ -327,7 +362,8 @@ class MultiValue extends FormElement {
    *
    * @see \Drupal\Core\Field\WidgetBase::addMoreAjax()
    */
-  public static function addMoreAjax(array $form, FormStateInterface $form_state): ?array {
+  public static function addMoreAjax(array $form,
+                                     FormStateInterface $form_state): ?array {
     $button = $form_state->getTriggeringElement();
 
     /* Obtengo el contenedor del widget (uno arriba). */
@@ -382,7 +418,9 @@ class MultiValue extends FormElement {
    * @param bool $required
    *   Indica si el elemento es obligatorio o no.
    */
-  protected static function setRequiredProperty(array &$elements, int $delta, bool $required): void {
+  protected static function setRequiredProperty(array &$elements,
+                                                int $delta,
+                                                bool $required): void {
     if ($delta === 0 && $required) {
 
       foreach ($elements as $element) {
@@ -422,7 +460,9 @@ class MultiValue extends FormElement {
    *
    * @see \Drupal\Core\Field\WidgetBase::getWidgetState()
    */
-  public static function getElementState(array $parents, string $element_name, FormStateInterface $form_state): ?array {
+  public static function getElementState(array $parents,
+                                         string $element_name,
+                                         FormStateInterface $form_state): ?array {
     return NestedArray::getValue($form_state->getStorage(), static::getElementStateParents($parents, $element_name));
   }
 
@@ -444,8 +484,13 @@ class MultiValue extends FormElement {
    *
    * @see \Drupal\Core\Field\WidgetBase::setWidgetState()
    */
-  public static function setElementState(array $parents, string $element_name, FormStateInterface $form_state, array $field_state): void {
-    NestedArray::setValue($form_state->getStorage(), static::getElementStateParents($parents, $element_name), $field_state);
+  public static function setElementState(array $parents,
+                                         string $element_name,
+                                         FormStateInterface $form_state,
+                                         array $field_state): void {
+    NestedArray::setValue($form_state->getStorage(),
+                          static::getElementStateParents($parents, $element_name),
+                          $field_state);
   }
 
   /**
@@ -461,7 +506,8 @@ class MultiValue extends FormElement {
    *
    * @see \Drupal\Core\Field\WidgetBase::getWidgetStateParents()
    */
-  protected static function getElementStateParents(array $parents, string $element_name): array {
+  protected static function getElementStateParents(array $parents,
+                                                   string $element_name): array {
     return array_merge(['multivalue_form_element_storage', '#parents'],
       $parents,
       ['#elements', $element_name],
