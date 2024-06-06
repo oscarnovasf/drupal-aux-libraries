@@ -1,8 +1,8 @@
-Librerías auxiliares para desarrollo de módulos en Drupal 8 y 9
+Librerías auxiliares para desarrollo de módulos en Drupal ^9
 ===
 
 >Este repositorio contiene una serie de librerías que uso habitualmente en mis
->proyectos de Drupal 8 / 9.
+>proyectos de Drupal ^9.
 
 [![version][version-badge]][changelog]
 [![Licencia][license-badge]][license]
@@ -75,8 +75,8 @@ momento.
 
 [mi-web]: https://oscarnovas.com "for developers"
 
-[version]: v0.1.4
-[version-badge]: https://img.shields.io/badge/version-0.1.4-blue.svg
+[version]: v0.1.5
+[version-badge]: https://img.shields.io/badge/version-0.1.5-blue.svg
 
 [license]: LICENSE.md
 [license-badge]: https://img.shields.io/badge/Licencia-GPLv3+-green.svg "Leer la licencia"

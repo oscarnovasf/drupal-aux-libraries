@@ -141,7 +141,7 @@ class StringFunctions {
    *
    * @see README.md
    */
-  public static function stripWordHtml(string $text, string $allowed_tags = '<b><i><sup><sub><em><strong><u><br>') {
+  public static function stripWordHtml(string $text, string $allowed_tags = '<b><i><sup><sub><em><strong><u><br><p>') {
     mb_regex_encoding('UTF-8');
 
     // Replace MS special characters first.

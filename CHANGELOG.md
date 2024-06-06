@@ -1,7 +1,13 @@
 # Histórico de cambios
 >Todos los cambios notables de este proyecto se documentarán en este archivo.
 
-## [v0.1.4] - 2024-12-02
+## [v0.1.5] - 2024-06-06
+>Revisión
+### Modificados
+* Ajustes en función StringFunctions::stripWordHtml.
+
+---
+## [v0.1.4] - 2024-02-12
 >Revisión
 ### Añadidos
 * Nuevas funciones de ficheros (descarga con curl desde url).
